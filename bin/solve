@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+function exitWithError(string $message) {
+    echo 'Error: ' . $message . PHP_EOL;
+    exit(1);
+}
+
+if ($argc !== 4) {
+    exitWithError('Wrong number of arguments');
+}
+
+$year = (int) $argv[1];
+$day = (int) $argv[2];
+$part = (int) $argv[3];
+
+$className = 'AdventOfCode\Solution\Year' . $year .'\Day' . $day;
+$methodName = 'part' . $part;
+
+if (!method_exists($className, $methodName)) {
+    exitWithError('This solution is not implemented yet');
+}
+
+$inputPath = __DIR__ . '/../input/' . $year . '/' . $day . '.txt';
+$input = new SplFileObject($inputPath);
+
+$solution = new $className();
+
+echo 'Solving Year ' . $year . ' Day ' . $day . ' Part ' . $part . '...' . PHP_EOL;
+
+try {
+    $start = microtime(true);
+
+    $result = call_user_func([$solution, $methodName], $input);
+    
+    echo PHP_EOL;
+    echo 'Result: ' . $result . PHP_EOL;
+    echo PHP_EOL;
+    
+    $total = microtime(true) - $start;
+    
+    echo 'Time: ' . $total . 's' . PHP_EOL;
+    
+    exit(0);
+} catch (Throwable $exception) {
+    exitWithError($exception->getMessage());
+}
+
+exit(1);
