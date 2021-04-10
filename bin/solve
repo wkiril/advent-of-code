@@ -24,7 +24,7 @@ if (!method_exists($className, $methodName)) {
     exitWithError('This solution is not implemented yet');
 }
 
-$inputPath = __DIR__ . '/../input/' . $year . '/' . $day . '.txt';
+$inputPath = __DIR__ . '/../data/input/' . $year . '/' . $day . '.txt';
 $input = new SplFileObject($inputPath);
 
 $solution = new $className();
@@ -39,11 +39,11 @@ try {
     echo PHP_EOL;
     echo 'Result: ' . $result . PHP_EOL;
     echo PHP_EOL;
-    
+
     $total = microtime(true) - $start;
-    
+
     echo 'Time: ' . $total . 's' . PHP_EOL;
-    
+
     exit(0);
 } catch (Throwable $exception) {
     exitWithError($exception->getMessage());
