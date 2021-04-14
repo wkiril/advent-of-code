@@ -28,7 +28,7 @@ class Day4 implements SolutionInterface
         );
     }
 
-    private function getLowestNumber(SplFileObject $input, callable $condition)
+    private function getLowestNumber(SplFileObject $input, callable $condition): int
     {
         $secret = $input->fgets();
 
