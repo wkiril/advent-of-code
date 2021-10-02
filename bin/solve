@@ -42,7 +42,7 @@ try {
 
     $total = microtime(true) - $start;
 
-    echo 'Time: ' . $total . 's' . PHP_EOL;
+    echo 'Time: ' . round($total, 3) . 's Memory: ' . round(memory_get_peak_usage() / 1024 / 1024, 3) . 'MB' . PHP_EOL;
 
     exit(0);
 } catch (Throwable $exception) {
